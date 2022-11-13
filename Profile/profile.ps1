@@ -25,7 +25,10 @@ function Run-Bot($botIndex) {
             continue
         }
         3 {
-            Start-Bot -location "E:\DevStuff\Repositories\Dragonbot" -botName "Dragon"
+            <# Dragonbot doesn't use Node.js #>
+            Write-Host "Running the good old Dragonbot...`n"
+            Set-Location "E:\DevStuff\Repositories\Dragonbot"
+            python main.py
             continue
         }
         default {
