@@ -1,8 +1,7 @@
 Write-Output "Welcome back, Great DragunWF of the Philippines.`n"
-Set-Location E:\DevStuff\Repositories
 
 function Help-Profile() {
-    $commands = "  Help-Profile`n  Run-Bot -botIndex"
+    $commands = "- Help-Profile`n- Run-Bot -botIndex`n- Switch-Dir -index"
     Write-Host "Commands:`n$commands`n"
 }
 
@@ -10,6 +9,17 @@ function Start-Bot($location, $botName) {
     Write-Host "Running $botName Bot...`n"
     Set-Location $location
     npm start
+}
+
+function Switch-Dir($index) {
+    switch ($index) {
+        1 {
+            Set-Location E:\DevStuff\Repositories
+        }
+        2 {
+            Set-Location E:\DevStuff\Unity Projects
+        }
+    }
 }
 
 function Run-Bot($botIndex) {
