@@ -17,7 +17,7 @@ function Switch-Dir($index) {
             Set-Location E:\DevStuff\Repositories
         }
         2 {
-            Set-Location E:\DevStuff\Unity Projects
+            Set-Location "E:\DevStuff\Unity Projects"
         }
     }
 }
