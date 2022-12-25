@@ -1,7 +1,7 @@
 Write-Output "Welcome back, Great DragunWF of the Philippines.`n"
 
 function Help-Profile() {
-    $commands = "- Help-Profile`n- Run-Bot -botIndex`n- Switch-Dir -index"
+    $commands = "- Help-Profile`n- Run-Bot -botName`n- Dev -location"
     Write-Host "Commands:`n$commands`n"
 }
 
@@ -11,30 +11,29 @@ function Start-Bot($location, $botName) {
     npm start
 }
 
-function Switch-Dir($index) {
-    switch ($index) {
-        1 {
-            Set-Location E:\DevStuff\Repositories
-        }
-        2 {
-            Set-Location "E:\DevStuff\Unity Projects"
-        }
+function Dev($devLocation) {
+    if ($devLocation -eq "repo" -or $devLocation -eq "repositories" -or $devLocation -eq "repository") {
+        Set-Location "E:\DevStuff\Repositories"
+    }
+    elseif ($devLocation -eq "unity" -or $devLocation -eq "game" -or $devLocation -eq "gamedev") {
+        Set-Location "E:\DevStuff\Unity Projects"
+    }
+    else {
+        Write-Host "Developer location not recognized!`n"
     }
 }
 
-function Run-Bot($botIndex) {
-    $previousDir = Get-Location
-
-    switch ($botIndex) {
-        1 {
+function Run-Bot($botName) {
+    switch ($botName) {
+        "ancalagon" {
             Start-Bot -location "E:\DevStuff\Repositories\Ancalagon" -botName "Ancalagon"
             continue
         }
-        2 {
+        "scarlet" {
             Start-Bot -location "E:\DevStuff\Repositories\Scarlet" -botName "Scarlet"
             continue
         }
-        3 {
+        "dragonbot" {
             <# Dragonbot doesn't use Node.js #>
             Write-Host "Running the good old Dragonbot...`n"
             Set-Location "E:\DevStuff\Repositories\Dragonbot"
@@ -42,11 +41,9 @@ function Run-Bot($botIndex) {
             continue
         }
         default {
-            Write-Host "The index $botIndex is invalid!"
+            Write-Host "The bot $botName is not recogized!`n"
         }
     }
-
-    Set-Location = $previousDir
 }
 
 Help-Profile
