@@ -23,6 +23,10 @@ function Dev($devLocation) {
     }
 }
 
+function Backup-mh() { <# Backup Monster Hunter Rise save files #>
+    python E:\DevStuff\Repositories\mini-scripts\scripts\games\mh-rise\backup_save_files.py
+}
+
 function Run-Bot($botName) {
     switch ($botName) {
         "ancalagon" {
