@@ -1,7 +1,7 @@
 Write-Output "Welcome back, Great DragunWF of the Philippines.`n"
 
 function Help-Profile() {
-    $commands = "- Help-Profile`n- Run-Bot -botName`n- Dev -location"
+    $commands = "- Help-Profile`n- Run-Bot -botName`n- Dev -location`n- Backup"
     Write-Host "Commands:`n$commands`n"
 }
 
