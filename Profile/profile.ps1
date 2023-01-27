@@ -1,14 +1,8 @@
 Write-Output "Welcome back, Great DragunWF of the Philippines.`n"
 
 function Help-Profile() {
-    $commands = "- Help-Profile`n- Run-Bot -botName`n- Dev -location`n- Backup"
+    $commands = "- Help-Profile`n- Organize`n- Open -location`n- Run-Bot -botName`n- Dev -location`n- Backup"
     Write-Host "Commands:`n$commands`n"
-}
-
-function Start-Bot($location, $botName) {
-    Write-Host "Running $botName Bot...`n"
-    Set-Location $location
-    npm start
 }
 
 function Dev($devLocation) {
@@ -23,12 +17,22 @@ function Dev($devLocation) {
     }
 }
 
+function Organize() {
+    python "E:\DevStuff\Repositories\ShadowPlay-Organizer\src\main.py" "E:\Videos\NVIDIA GeForce\NVIDIA Shadowplay"
+}
+
 function Backup() { <# Backup Monster Hunter Rise save files #>
     python E:\DevStuff\Repositories\mini-scripts\scripts\games\mh-rise\backup_save_files.py
 }
 
 function Open($argument) {
     start $argument
+}
+
+function Start-Bot($location, $botName) {
+    Write-Host "Running $botName Bot...`n"
+    Set-Location $location
+    npm start
 }
 
 function Run-Bot($botName) {
