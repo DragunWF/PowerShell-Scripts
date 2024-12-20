@@ -1,61 +1,75 @@
+# Welcome Message
 Write-Output "Welcome back, Great DragunWF of the Philippines.`n"
 
-function Help-Profile() {
-    $commands = "- Help-Profile`n- Organize`n- Open -location`n- Run-Bot -botName`n- Dev -location`n- Backup"
-    Write-Host "Commands:`n$commands`n"
+# Data Configuration
+$global:config = @{
+    Commands  = @("Help-Profile", "Organize", "Open -location", "Run-Bot -botName", "Dev -location", "Backup-Mh-Rise")
+    Locations = @{
+        "repo"       = "E:\DevStuff\Repositories"
+        "unity"      = "E:\DevStuff\Unity Projects"
+    }
+    Bots      = @{
+        "dragunbot"  = @{ Path = "E:\DevStuff\Repositories\DragunBot"; Cmd = { python bot\main.py } }
+        "dragonbot"  = @{ Path = "E:\DevStuff\Repositories\Dragonbot"; Cmd = { python main.py } }
+        "ancalagon"  = @{ Path = "E:\DevStuff\Repositories\Ancalagon"; Cmd = { npm start } }
+        "scarlet"    = @{ Path = "E:\DevStuff\Repositories\Scarlet"; Cmd = { npm start } }
+    }
+}
+
+# Function Definitions
+
+function Help-Profile {
+    Write-Host "Commands:"
+    foreach ($command in $global:config.Commands) {
+        Write-Host "- $command"
+    }
+
+    Write-Host "`nLocations:"
+    foreach ($location in $global:config.Locations.Keys) {
+        Write-Host "- $location"
+    }
+
+    Write-Host "`nBots:"
+    foreach ($botName in $global:config.Bots.Keys) {
+        Write-Host "- $botName"
+    }
+    Write-Host ""
 }
 
 function Dev($devLocation) {
-    if ($devLocation -eq "repo" -or $devLocation -eq "repositories" -or $devLocation -eq "repository") {
-        Set-Location "E:\DevStuff\Repositories"
-    }
-    elseif ($devLocation -eq "unity" -or $devLocation -eq "game" -or $devLocation -eq "gamedev") {
-        Set-Location "E:\DevStuff\Unity Projects"
-    }
-    else {
-        Write-Host "Developer location not recognized!`n"
+    if ($global:config.Locations.ContainsKey($devLocation)) {
+        Set-Location $global:config.Locations[$devLocation]
+    } else {
+        Write-Host "Developer location '$devLocation' not recognized!`n"
     }
 }
 
-function Organize() {
+function Organize {
     python "E:\DevStuff\Repositories\ShadowPlay-Organizer\src\main.py" "E:\Videos\NVIDIA GeForce\NVIDIA Shadowplay"
 }
 
-function Backup() { <# Backup Monster Hunter Rise save files #>
-    python E:\DevStuff\Repositories\mini-scripts\scripts\games\mh-rise\backup_save_files.py
+function Backup-Mh-Rise {
+    python "E:\DevStuff\Repositories\mini-scripts\scripts\games\mh-rise\backup_save_files.py"
 }
 
 function Open($argument) {
-    start $argument
-}
-
-function Start-Bot($location, $botName) {
-    Write-Host "Running $botName Bot...`n"
-    Set-Location $location
-    npm start
-}
-
-function Run-Bot($botName) {
-    switch ($botName) {
-        "ancalagon" {
-            Start-Bot -location "E:\DevStuff\Repositories\Ancalagon" -botName "Ancalagon"
-            continue
-        }
-        "scarlet" {
-            Start-Bot -location "E:\DevStuff\Repositories\Scarlet" -botName "Scarlet"
-            continue
-        }
-        "dragonbot" {
-            <# Dragonbot doesn't use Node.js #>
-            Write-Host "Running the good old Dragonbot...`n"
-            Set-Location "E:\DevStuff\Repositories\Dragonbot"
-            python main.py
-            continue
-        }
-        default {
-            Write-Host "The bot $botName is not recogized!`n"
-        }
+    try {
+        start $argument
+    } catch {
+        Write-Host "Failed to open: $argument"
     }
 }
 
+function Run-Bot($botName) {
+    if ($global:config.Bots.ContainsKey($botName)) {
+        $bot = $global:config.Bots[$botName]
+        Write-Host "Running `"$botName`" Bot...`n"
+        Set-Location $bot.Path
+        & $bot.Cmd
+    } else {
+        Write-Host "The bot '$botName' is not recognized!`n"
+    }
+}
+
+# Run Help on Load
 Help-Profile
