@@ -7,6 +7,7 @@ $global:config = @{
     Locations = @{
         "repo"       = "E:\DevStuff\Repositories"
         "unity"      = "E:\DevStuff\Unity Projects"
+        "smartstudy" = "E:\DevStuff\Repositories\SmartStudy"
     }
     Bots      = @{
         "dragunbot"  = @{ Path = "E:\DevStuff\Repositories\DragunBot"; Cmd = { python bot\main.py } }
