@@ -8,6 +8,7 @@ $global:config = @{
         "repo"       = "E:\DevStuff\Repositories"
         "unity"      = "E:\DevStuff\Unity Projects"
         "smartstudy" = "E:\DevStuff\Repositories\SmartStudy"
+        "smartstudy-backend" = "E:\DevStuff\Repositories\SmartStudy\SmartStudy-Django-Backend"
     }
     Bots      = @{
         "dragunbot"  = @{ Path = "E:\DevStuff\Repositories\DragunBot"; Cmd = { python bot\main.py } }
