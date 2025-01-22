@@ -3,7 +3,7 @@ Write-Output "Welcome back, Great DragunWF of the Philippines.`n"
 
 # Data Configuration
 $global:config = @{
-    Commands  = @("Help-Profile", "Organize", "Open -location", "Run-Bot -botName", "Dev -location", "Backup-Mh-Rise")
+    Commands  = @("Help-Profile", "Organize", "Open -location", "Run-Bot -botName", "Dev -location", "Backup-Mh-Rise", "Get-Storage-Status")
     Locations = @{
         "repo"       = "E:\DevStuff\Repositories"
         "unity"      = "E:\DevStuff\Unity Projects"
@@ -71,6 +71,10 @@ function Run-Bot($botName) {
     } else {
         Write-Host "The bot '$botName' is not recognized!`n"
     }
+}
+
+function Get-Storage-Status() {
+    E:\DevStuff\Repositories\PowerShell-Scripts\Misc\get_storage_status.ps1
 }
 
 # Run Help on Load
