@@ -1,3 +1,6 @@
+# Initialize oh-my-posh theme
+oh-my-posh init pwsh --config 'C:\Users\Darth Wolf\AppData\Local\Programs\oh-my-posh\themes\thecyberden.omp.json' | Invoke-Expression
+
 # Welcome Message
 Write-Output "Welcome back, Great DragunWF of the Philippines.`n"
 
