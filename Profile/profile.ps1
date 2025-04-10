@@ -4,9 +4,21 @@ oh-my-posh init pwsh --config 'E:\DevStuff\Repositories\PowerShell-Scripts\Confi
 # Welcome Message
 Write-Output "Welcome back, Great DragunWF of the Philippines.`n"
 
+$global:shutdown_started = $false
+
 # Data Configuration
 $global:config = @{
-    Commands  = @("Help-Profile", "Organize", "Open -location", "Run-Bot -botName", "Dev -location", "Backup-Mh-Rise", "Get-Storage-Status")
+    Commands  = @(
+        "Help-Profile", 
+        "Organize", 
+        "Open -location", 
+        "Run-Bot -botName", 
+        "Dev -location", 
+        "Backup-Mh-Rise", 
+        "Get-Storage-Status",
+        "shutdown-start -minutes",
+        "shutdown-cancel"
+    )
     Locations = @{
         "repo"       = "E:\DevStuff\Repositories"
         "unity"      = "E:\DevStuff\Unity Projects"
@@ -78,6 +90,40 @@ function Run-Bot($botName) {
 
 function Get-Storage-Status() {
     E:\DevStuff\Repositories\PowerShell-Scripts\Misc\get_storage_status.ps1
+}
+
+function shutdown-start($minutes) {
+    if ($null -eq $minutes -or $minutes -eq "") {
+        Write-Host "Error: No time specified. Please provide minutes as an argument to the parameter."
+        return
+    }
+    
+    try {
+        $minutesInt = [int]$minutes
+    }
+    catch {
+        Write-Host "Error: Invalid input. Please provide a valid number."
+        return
+    }
+    
+    if ($minutesInt -lt 0) {
+        Write-Host "Error: Cannot schedule shutdown with negative time. Please provide a positive number of minutes."
+        return
+    }
+    
+    shutdown /s /t ($minutesInt * 60)
+    if (!$global:shutdown_started) {
+        $global:shutdown_started = $true
+        Write-Host "Your computer will shutdown in $minutesInt minute(s)"
+    }
+}
+
+function shutdown-cancel() {
+    shutdown /a
+    if ($global:shutdown_started) {
+        $global:shutdown_started = $false
+        Write-Host "Computer shutdown has been cancelled!"
+    }
 }
 
 # Run Help on Load
