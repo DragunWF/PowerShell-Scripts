@@ -114,7 +114,9 @@ function shutdown-start($minutes) {
     shutdown /s /t ($minutesInt * 60)
     if (!$global:shutdown_started) {
         $global:shutdown_started = $true
-        Write-Host "Your computer will shutdown in $minutesInt minute(s)"
+        $shutdownTime = (Get-Date).AddMinutes($minutesInt)
+        $formattedTime = $shutdownTime.ToString("h:mm tt")
+        Write-Host "Your computer will shutdown in $minutesInt minute(s) at $formattedTime"
     }
 }
 
