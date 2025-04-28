@@ -24,6 +24,7 @@ $global:config = @{
         "unity"      = "E:\DevStuff\Unity Projects"
         "smartstudy" = "E:\DevStuff\Repositories\SmartStudy"
         "smartstudy-backend" = "E:\DevStuff\Repositories\SmartStudy\SmartStudy-Django-Backend"
+        "curvera" = "E:\DevStuff\Repositories\Curvera-System"
     }
     Bots      = @{
         "dragunbot"  = @{ Path = "E:\DevStuff\Repositories\DragunBot"; Cmd = { python bot\main.py } }
