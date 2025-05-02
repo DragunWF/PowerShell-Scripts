@@ -2,7 +2,7 @@
 oh-my-posh init pwsh --config 'E:\DevStuff\Repositories\PowerShell-Scripts\Config\dragunwf.json' | Invoke-Expression
 
 # Welcome Message
-Write-Output "Welcome back, Great DragunWF of the Philippines.`n"
+Write-Output "Welcome back, DragunWF. Continue on your quest for self-improvement!`n"
 
 $global:shutdown_started = $false
 
